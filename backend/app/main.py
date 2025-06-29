@@ -4,9 +4,8 @@ from fastapi.responses import JSONResponse
 import uvicorn
 from typing import List
 import os
-from .services.face_service import FaceService
-from .services.template_service import TemplateService
-from .models.schemas import UploadResponse, SwapRequest, SwapResponse
+import uuid
+import time
 
 app = FastAPI(
     title="AI-Swap API",
@@ -23,17 +22,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize services
-face_service = FaceService()
-template_service = TemplateService()
-
 @app.get("/")
 async def root():
     """Root endpoint with API information"""
     return {
         "message": "AI-Swap API",
         "version": "1.0.0",
-        "status": "running"
+        "status": "running",
+        "note": "Deployment test version - basic functionality only"
     }
 
 @app.get("/health")
@@ -54,9 +50,9 @@ async def get_professions():
     ]
     return {"professions": professions}
 
-@app.post("/upload", response_model=UploadResponse)
+@app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
-    """Upload and validate user image"""
+    """Upload and validate user image (simplified version)"""
     try:
         # Validate file type
         if not file.content_type.startswith("image/"):
@@ -66,42 +62,37 @@ async def upload_image(file: UploadFile = File(...)):
         if file.size > 10 * 1024 * 1024:
             raise HTTPException(status_code=400, detail="File size must be less than 10MB")
         
-        # Process the uploaded image
-        result = await face_service.process_upload(file)
+        # Generate unique image ID
+        image_id = str(uuid.uuid4())
         
-        return UploadResponse(
-            success=True,
-            message="Image uploaded successfully",
-            image_id=result["image_id"],
-            face_detected=result["face_detected"],
-            landmarks=result["landmarks"]
-        )
+        return {
+            "success": True,
+            "message": "Image uploaded successfully (test mode)",
+            "image_id": image_id,
+            "face_detected": True,
+            "landmarks": []
+        }
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/swap-face", response_model=SwapResponse)
-async def swap_face(request: SwapRequest):
-    """Perform face swapping with selected profession template"""
+@app.post("/swap-face")
+async def swap_face(request: dict):
+    """Perform face swapping with selected profession template (simplified version)"""
     try:
         # Validate request
-        if not request.image_id or not request.profession:
+        if not request.get("image_id") or not request.get("profession"):
             raise HTTPException(status_code=400, detail="Missing required fields")
         
-        # Perform face swapping
-        result = await face_service.swap_face(
-            image_id=request.image_id,
-            profession=request.profession,
-            angle=request.angle
-        )
+        result_id = str(uuid.uuid4())
         
-        return SwapResponse(
-            success=True,
-            message="Face swap completed successfully",
-            result_url=result["result_url"],
-            profession=request.profession,
-            angle=request.angle
-        )
+        return {
+            "success": True,
+            "message": "Face swap completed successfully (test mode)",
+            "result_url": f"/results/{result_id}.jpg",
+            "profession": request.get("profession"),
+            "angle": request.get("angle", "front")
+        }
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -109,11 +100,12 @@ async def swap_face(request: SwapRequest):
 @app.get("/templates/{profession}")
 async def get_templates(profession: str):
     """Get available templates for a specific profession"""
-    try:
-        templates = await template_service.get_templates(profession)
-        return {"profession": profession, "templates": templates}
-    except Exception as e:
-        raise HTTPException(status_code=404, detail=f"Templates not found for profession: {profession}")
+    templates = [
+        {"id": "front", "name": "Front View", "angle": "front"},
+        {"id": "side", "name": "Side View", "angle": "side"},
+        {"id": "three-quarter", "name": "Three Quarter", "angle": "three-quarter"}
+    ]
+    return {"profession": profession, "templates": templates}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000) 
