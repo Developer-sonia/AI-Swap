@@ -1,0 +1,115 @@
+{
+  "doctor": {
+    "name": "Doctor",
+    "description": "Medical professional",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "white",
+      "blue"
+    ],
+    "accessories": [
+      "stethoscope",
+      "lab_coat"
+    ]
+  },
+  "professor": {
+    "name": "Professor",
+    "description": "Academic educator",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "black",
+      "brown"
+    ],
+    "accessories": [
+      "glasses",
+      "tie",
+      "blazer"
+    ]
+  },
+  "engineer": {
+    "name": "Engineer",
+    "description": "Technical professional",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "blue",
+      "gray"
+    ],
+    "accessories": [
+      "hard_hat",
+      "safety_vest"
+    ]
+  },
+  "lawyer": {
+    "name": "Lawyer",
+    "description": "Legal professional",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "black",
+      "navy"
+    ],
+    "accessories": [
+      "suit",
+      "tie",
+      "briefcase"
+    ]
+  },
+  "business": {
+    "name": "Business Executive",
+    "description": "Corporate professional",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "black",
+      "gray",
+      "navy"
+    ],
+    "accessories": [
+      "suit",
+      "tie",
+      "watch"
+    ]
+  },
+  "artist": {
+    "name": "Artist",
+    "description": "Creative professional",
+    "angles": [
+      "front",
+      "side",
+      "three_quarter",
+      "back"
+    ],
+    "colors": [
+      "vibrant",
+      "creative"
+    ],
+    "accessories": [
+      "beret",
+      "paint_brush",
+      "palette"
+    ]
+  }
+}
