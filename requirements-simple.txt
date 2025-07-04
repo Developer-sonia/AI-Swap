@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-gunicorn
-python-multipart
-opencv-python-headless
-pillow
-numpy
-requests
-python-dotenv 
