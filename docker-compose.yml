@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  ai-swap:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/uploads:/app/backend/uploads
+      - ./backend/results:/app/backend/results
+      - ./backend/logs:/app/backend/logs
+      - ./backend/.env:/app/backend/.env
+    environment:
+      - PYTHONPATH=/app
+      - FLASK_APP=backend.wsgi
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend/static:/usr/share/nginx/html/static
+    depends_on:
+      - ai-swap
+    restart: unless-stopped 

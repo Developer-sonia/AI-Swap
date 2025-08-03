@@ -1,56 +1,97 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Any
+from typing import Optional, List, Dict, Any
+from datetime import datetime
 
 class UploadResponse(BaseModel):
     """Response model for image upload"""
-    success: bool
     message: str
-    image_id: Optional[str] = None
-    face_detected: Optional[bool] = None
-    landmarks: Optional[List[Dict[str, Any]]] = None
+    file_path: str
+    file_name: str
+    uploaded_at: datetime = Field(default_factory=datetime.now)
 
 class SwapRequest(BaseModel):
     """Request model for face swapping"""
-    image_id: str = Field(..., description="ID of the uploaded image")
+    image_path: str = Field(..., description="Path to uploaded image")
     profession: str = Field(..., description="Target profession for face swap")
-    angle: str = Field(default="front", description="Target angle (front, side, three_quarter, back)")
+    angle: Optional[str] = Field(default="front", description="Target angle (front, side, three_quarter, back)")
+    color: Optional[str] = Field(default=None, description="Target color scheme")
+    accessories: Optional[List[str]] = Field(default=None, description="Target accessories")
 
 class SwapResponse(BaseModel):
     """Response model for face swapping"""
-    success: bool
     message: str
-    result_url: Optional[str] = None
-    profession: Optional[str] = None
-    angle: Optional[str] = None
-
-class Profession(BaseModel):
-    """Model for profession data"""
-    id: str
-    name: str
-    description: str
-
-class Template(BaseModel):
-    """Model for template data"""
-    id: str
+    result_path: str
     profession: str
     angle: str
-    image_url: str
+    processed_at: datetime = Field(default_factory=datetime.now)
+
+class ProfessionInfo(BaseModel):
+    """Model for profession information"""
+    name: str
     description: str
+    angles: List[str]
+    colors: List[str]
+    accessories: List[str]
 
-class FaceLandmarks(BaseModel):
-    """Model for facial landmarks"""
-    nose: Dict[str, float]
-    left_eye: Dict[str, float]
-    right_eye: Dict[str, float]
-    left_ear: Dict[str, float]
-    right_ear: Dict[str, float]
-    mouth: Dict[str, float]
-    chin: Dict[str, float]
+class TemplateInfo(BaseModel):
+    """Model for template information"""
+    profession: str
+    angle: str
+    color: Optional[str] = None
+    accessories: Optional[List[str]] = None
+    template_path: str
 
-class ProcessingResult(BaseModel):
-    """Model for image processing results"""
-    image_id: str
-    face_detected: bool
-    landmarks: Optional[FaceLandmarks] = None
-    confidence: float
-    processing_time: float 
+class HealthResponse(BaseModel):
+    """Health check response"""
+    status: str
+    service: str
+    version: str
+    timestamp: datetime = Field(default_factory=datetime.now)
+
+class ErrorResponse(BaseModel):
+    """Error response model"""
+    error: str
+    detail: Optional[str] = None
+    timestamp: datetime = Field(default_factory=datetime.now)
+
+class APIInfo(BaseModel):
+    """API information response"""
+    message: str
+    version: str
+    status: str
+    note: str
+    endpoints: Dict[str, str]
+
+class FileUploadResponse(BaseModel):
+    """File upload response"""
+    success: bool
+    file_path: Optional[str] = None
+    error: Optional[str] = None
+    file_size: Optional[int] = None
+    content_type: Optional[str] = None
+
+class ProcessingStatus(BaseModel):
+    """Processing status response"""
+    status: str  # "pending", "processing", "completed", "failed"
+    progress: Optional[int] = None  # 0-100
+    message: Optional[str] = None
+    result_path: Optional[str] = None
+    error: Optional[str] = None
+
+class UserSession(BaseModel):
+    """User session model"""
+    session_id: str
+    user_id: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.now)
+    last_activity: datetime = Field(default_factory=datetime.now)
+    uploads: List[str] = Field(default_factory=list)
+    results: List[str] = Field(default_factory=list)
+
+class AnalyticsData(BaseModel):
+    """Analytics data model"""
+    total_uploads: int
+    total_swaps: int
+    popular_professions: List[Dict[str, Any]]
+    average_processing_time: float
+    success_rate: float
+    timestamp: datetime = Field(default_factory=datetime.now) 
