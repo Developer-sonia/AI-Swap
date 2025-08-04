@@ -54,7 +54,7 @@ python3.10 -m venv venv
 echo "📦 Step 8: Installing Python dependencies..."
 source venv/bin/activate
 pip install --upgrade pip
-pip install --no-cache-dir -r backend/requirements.txt
+pip install --no-cache-dir -r backend/requirements-minimal.txt
 
 # Step 9: Create directories
 echo "📁 Step 9: Creating necessary directories..."
