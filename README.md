@@ -45,7 +45,14 @@ AI-Swap/
 
 3. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   # For production (minimal dependencies)
+   pip install -r requirements-minimal.txt
+   
+   # For development (all dependencies)
+   pip install -r requirements-dev.txt
+   
+   # For full production (all features)
+   pip install -r backend/requirements.txt
    ```
 
 4. Set up environment variables:

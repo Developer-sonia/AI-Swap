@@ -1,0 +1,9 @@
+# AI-Swap Project Requirements
+# This file references the backend requirements for easy deployment
+
+# Backend Dependencies (FastAPI + Image Processing)
+-r backend/requirements-minimal.txt
+
+# Note: For development, use backend/requirements-dev.txt
+# For full production, use backend/requirements.txt
+# For lightweight deployment (2GB RAM VPS), use backend/requirements-minimal.txt 

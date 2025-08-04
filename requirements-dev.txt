@@ -1,0 +1,64 @@
+# AI-Swap Development Requirements
+# This file includes all development tools and dependencies
+
+# Include production dependencies
+-r backend/requirements.txt
+
+# Development and Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+
+# Code Quality and Formatting
+black==23.12.1
+isort==5.13.2
+flake8==6.1.0
+mypy==1.8.0
+bandit==1.7.5
+safety==2.3.5
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+myst-parser==2.0.0
+
+# Debugging and Profiling
+ipython==8.18.1
+jupyter==1.0.0
+memory-profiler==0.61.0
+line-profiler==4.1.2
+
+# API Testing
+httpx==0.25.2
+requests-mock==1.11.0
+
+# Database Testing
+mongomock==4.1.2
+fakeredis==2.20.1
+
+# Mock and Stub Libraries
+freezegun==1.2.2
+responses==0.24.1
+
+# Type Checking
+types-requests==2.31.0.10
+types-PyYAML==6.0.12.12
+
+# Development Server
+watchdog==3.0.0
+
+# Performance Testing
+locust==2.17.0
+
+# Security Testing
+bandit==1.7.5
+safety==2.3.5
+
+# Code Coverage
+coverage==7.3.2
+codecov==2.1.13
+
+# Pre-commit Hooks
+pre-commit==3.6.0 
