@@ -23,7 +23,7 @@ transformers==4.36.2
 # HTTP and API
 requests==2.31.0
 httpx==0.25.2
-aiohttp==3.9.1
+aiohttp==3.12.14
 
 # Configuration and Environment
 python-dotenv==1.0.0
