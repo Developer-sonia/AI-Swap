@@ -43,7 +43,7 @@ python3.10 -m venv venv
 echo "📦 Installing Python dependencies..."
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements-minimal.txt
+pip install -r requirements.txt
 
 # Create directories
 echo "📁 Creating necessary directories..."

@@ -14,8 +14,8 @@ AI-Swap/
 │   │   └── utils/          # Utility functions
 │   ├── templates/          # Pre-rendered profession templates
 │   ├── uploads/            # User uploaded images
-│   ├── results/            # Generated face swaps
-│   └── requirements.txt    # Python dependencies
+│   └── results/            # Generated face swaps
+├── requirements.txt         # Python dependencies
 ├── frontend/               # React.js frontend
 │   ├── src/
 │   │   ├── components/     # React components
@@ -45,14 +45,7 @@ AI-Swap/
 
 3. Install dependencies:
    ```bash
-   # For production (minimal dependencies)
-   pip install -r requirements-minimal.txt
-   
-   # For development (all dependencies)
-   pip install -r requirements-dev.txt
-   
-   # For full production (all features)
-   pip install -r backend/requirements.txt
+   pip install -r requirements.txt
    ```
 
 4. Set up environment variables:

@@ -35,7 +35,7 @@ python3.10 -m venv venv
 echo "Step 6: Installing Python dependencies..."
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r requirements-minimal.txt
+pip install -r requirements.txt
 
 # Step 7: Create necessary directories
 echo "Step 7: Creating necessary directories..."
